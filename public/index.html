@@ -1,12 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Server-side with Node.js</title>
+    <title>Server-side with Node.js - Geolocation</title>
 </head>
+
 <body>
-    <h1>Server-side with node</h1>
+    <h1>Server-side with node - Geolocation </h1>
+
+    <h3>Latitude: <span id="latitude_span"></span>&deg;</h3>
+    <h3>Longtitude: <span id="longtitude_span"></span>&deg;</h3>
+
+    <button onclick=generate_coords()>Generate Co-ordinates</button>
+
+
 </body>
+
+<script>
+    if ('geolocation' in navigator) {
+        console.log("geolocation is available");
+    } else {
+        console.log("geolocation is NOT available");
+    }
+
+    function generate_coords() {
+        navigator.geolocation.getCurrentPosition(async position => {
+            console.log(`Latitude: ${position.coords.latitude}`);
+            console.log(`Longitude: ${position.coords.longitude}`);
+
+            const latitude = position.coords.latitude;
+            document.getElementById("latitude_span").textContent = latitude;
+
+            const longitude = position.coords.longitude;
+            document.getElementById("longtitude_span").textContent = longitude;
+
+            // Posting data to the server (index.js), options includes info that states this is POST request
+
+            const data = {
+                latitude,
+                longitude
+            };
+            const options = {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+            // send this data to endpoint - /api
+
+            const response = await fetch('/api', options);
+            const response_data = await response.json();
+            console.log(response_data);
+            console.log(response_data.status);
+
+
+
+
+
+        });
+    }
+</script>
+
 </html>

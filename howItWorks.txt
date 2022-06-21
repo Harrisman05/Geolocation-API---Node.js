@@ -8,11 +8,15 @@ How to start project:
 - index.js is the entry point, this file is the server
 - in the terminal, run "node index.js" to run the index.js file in the node runtime
 
+---------------------------------------------------------------------------------------------
+
 What is a server?
 
 A server is an application that runs and listens for requests, people that want to connect to the server.
 The server acts as the central repository of the data of the application.
 In Node.js, Express.js is used as a web framework and to initialise a server
+
+---------------------------------------------------------------------------------------------
 
  What are the purposes of Servers?
 
@@ -26,6 +30,8 @@ Install Express
 - package-lock.json will be created which keeps track of dependencies and versions of all packages
 - Time to code in index.js!!
 
+---------------------------------------------------------------------------------------------
+
 How to set-up Express server in index.js
 
 const express = require("express"); - import express into index.js
@@ -38,6 +44,8 @@ app.listen(3000, () => console.log("Port 3000 is listening for requests"));
 
  - Second parameter is callback function which executes once request is made by client
 
+ ---------------------------------------------------------------------------------------------
+
 Serving index.html file to client from server
 
 Error will pop up "Cannot GET /" as the server is not hosting any html folder to the client, despite the fact the connection has been setup 
@@ -48,6 +56,15 @@ Error will pop up "Cannot GET /" as the server is not hosting any html folder to
 app.use(express.static('public'));
 
 - Now Express will serve to the client the index.html file thats in the public folder
+
+---------------------------------------------------------------------------------------------
+
+Routing 
+
+https://expressjs.com/en/starter/basic-routing.html
+
+Routing refers to determining how an application responds to a client request to a particular endpoint,
+which is a URI (or path) and a specific HTTP request method (GET, POST, and so on).
 
 
 
