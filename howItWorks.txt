@@ -1,0 +1,54 @@
+How server-side JavaScript works
+
+https://www.youtube.com/watch?v=wxbQP1LMZsw&list=PLRqwX-V7Uu6YxDKpFzf_2D84p0cyk4T7X&index=9&ab_channel=TheCodingTrain - 5:24
+
+How to start project: 
+
+- Run "npm init" initialse and create package.json (config file)
+- index.js is the entry point, this file is the server
+- in the terminal, run "node index.js" to run the index.js file in the node runtime
+
+What is a server?
+
+A server is an application that runs and listens for requests, people that want to connect to the server.
+The server acts as the central repository of the data of the application.
+In Node.js, Express.js is used as a web framework and to initialise a server
+
+ What are the purposes of Servers?
+
+ 1) Serve web pages for client
+
+Install Express
+
+- Run "npm install express" to install Express.js
+- node_modules will be downloaded to allow Express.js to function, as Express.js has dependencies that require it to run
+- package.json will update to include express.js as a dependency
+- package-lock.json will be created which keeps track of dependencies and versions of all packages
+- Time to code in index.js!!
+
+How to set-up Express server in index.js
+
+const express = require("express"); - import express into index.js
+
+const app = express(); - initialise express and store it in app variable
+
+app.listen(3000, () => console.log("Port 3000 is listening for requests"));
+ 
+ - servers need to listen for requests, so we need to call .listen(). 3000 is the port used so its passed in as a parameter (ports are logical endpoints of a network connect that is used to exchange information between a web server and a web client)
+
+ - Second parameter is callback function which executes once request is made by client
+
+Serving index.html file to client from server
+
+Error will pop up "Cannot GET /" as the server is not hosting any html folder to the client, despite the fact the connection has been setup 
+
+- Use express to host static files
+- Create public folder to hold static files (anything in public folder is accessible for the client)
+
+app.use(express.static('public'));
+
+- Now Express will serve to the client the index.html file thats in the public folder
+
+
+
+
