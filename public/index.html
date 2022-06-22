@@ -51,15 +51,11 @@
                 body: JSON.stringify(data)
             }
             // send this data to endpoint - /api
+            // adding options to send to server with the fetch
 
-            const response = await fetch('/api', options);
-            const response_data = await response.json();
-            console.log(response_data);
+            const response = await fetch('/api', options); // send request
+            const response_data = await response.json(); // handle response
             console.log(response_data.status);
-
-
-
-
 
         });
     }

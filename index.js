@@ -1,6 +1,10 @@
 const test = "node is running";
 console.log(test);
 
+const Datastore = require('nedb');
+const database = new Datastore('coordinates.db');
+database.loadDatabase();
+
 const express = require("express");
 const app = express();
 
@@ -20,7 +24,13 @@ app.use(express.json({
 
 app.post('/api', (request, response) => {
     console.log("Request received");
-    console.log(request.body);
+
+    const timestamp = Date.now();
+    const received_data = request.body;
+    received_data.timestamp = timestamp;
+    
+    console.log(received_data);
+    database.insert(received_data)
 
     // posting a response back to client to confirm receipt
 
@@ -28,3 +38,5 @@ app.post('/api', (request, response) => {
         status: "success, response received from server and handled by the client"
     });
 });
+
+
