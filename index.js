@@ -23,7 +23,7 @@ app.use(express.json({
 // Setting up /api endpoint for the POST request by fetch originating from the client
 
 app.post('/api', (request, response) => {
-    console.log("Request received");
+    console.log("POST request received");
 
     const timestamp = Date.now();
     const received_data = request.body;
@@ -38,5 +38,21 @@ app.post('/api', (request, response) => {
         status: "success, response received from server and handled by the client"
     });
 });
+
+// Can re-use '/api' endpoint because I've only written a function to handle POST requests
+
+app.get('/api', (request, response) => {
+
+    console.log("GET request received");
+
+    database.find({}, (error, data) => {
+        response.json(data);
+
+        if (error) {
+            response.end();
+            return;
+        }
+    });
+})
 
 

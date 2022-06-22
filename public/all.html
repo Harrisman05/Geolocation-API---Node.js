@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Geolocation Data</title>
+</head>
+
+<style>
+
+    * {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        box-sizing: border-box;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    #geolocation_table {
+        border: 1px black solid;
+        margin: auto;
+        padding: 5px;
+    }
+
+    #geolocation_table td {
+        padding: 15px;
+    }
+
+    .position_anchor_tag {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 25px;
+    }
+
+
+</style>
+
+<body>
+
+    <h1>All Geolocation Data</h1>
+
+    <table id="geolocation_table">
+        <thead>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Timestamp</th>
+        </thead>
+    </table>
+
+    <div class="position_anchor_tag"><a href="index.html">Return to home page</a></div>
+    
+    
+</body>
+
+<script>
+
+    async function getAllData() {
+
+        const response = await fetch('/api');
+        const data = await response.json();
+        console.log(data);
+
+        let geolocation_table = document.getElementById("geolocation_table")
+
+        for (element of data) {
+            
+            const date = new Date(element.timestamp).toLocaleString('en-GB');
+            geolocation_row = `<tr><td>${element.latitude}</td><td>${element.longitude}</td><td>${date}</td></tr>`;
+            geolocation_table.innerHTML += geolocation_row;
+
+        }
+        
+    }
+
+    getAllData();
+    
+
+</script>
+</html>
